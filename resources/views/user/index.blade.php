@@ -7,8 +7,11 @@
     </div>
 
     <div class="card">
+        @if (Session::has('message'))
+            <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
         <div class="card-header">
-            <a href="{{ route('user.create') }}" class="float-right">Create</a>
+            <a href="{{ route('user.create') }}" class="float-right btn btn-primary">Create</a>
         </div>
         <div class="card-body">
             <table class="table">
@@ -23,10 +26,12 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->username}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>#</td>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                            <a href="{{route('user.edit',$user->id)}}" class="btn btn-success">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
 
