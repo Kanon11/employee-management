@@ -10,9 +10,31 @@
         @if (Session::has('message'))
             <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
+
         <div class="card-header">
-            <a href="{{ route('user.create') }}" class="float-right btn btn-primary">Create</a>
+
+            <div class="row">
+                <div class="col-6">
+                    <form method="GET" action="{{route('user.index')}}">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <input type="search" name="search" class="form-control mb-2" id="autoSizingInput"
+                                    placeholder="name/email">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <a href="{{ route('user.create') }}" class="float-right btn btn-primary">Create</a>
+                </div>
+            </div>
+
         </div>
+
+
         <div class="card-body">
             <table class="table">
                 <thead>
@@ -30,7 +52,7 @@
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                            <a href="{{route('user.edit',$user->id)}}" class="btn btn-success">Edit</a>
+                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success">Edit</a>
                             </td>
                         </tr>
                     @endforeach
