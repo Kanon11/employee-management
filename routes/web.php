@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\StateController;
 use App\Http\Controllers\UserUpdatePasswordController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('user',UserController::class);
 Route::resource('country',CountryController::class);
+Route::resource('/state',StateController::class);
 
 Route::post('/user/{user}/change-password',[UserUpdatePasswordController::class, 'ChangePassword'])->name('user.upadate.password');

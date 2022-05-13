@@ -2,30 +2,34 @@
 
 @section('content')
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Country creation</h1>
+        <h1 class="h3 mb-0 text-gray-800">State creation</h1>
     </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Create') }}
-                    <a href="{{route('country.index')}}" class="btn btn-primary float-right">Back</a>
+                        <a href="{{ route('state.index') }}" class="float-right">Back</a>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('country.store') }}">
+                        <form method="POST" action="{{ route('state.store') }}">
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="name"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('name') }}</label>
+                                <label for="country_code"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Country Code') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                    @error('name')
+                                    <select name="country_id" class="form-control" aria-label="Default select example">
+                                        @foreach ($countries as $country)
+                                            <option value="{{$country->id}}">{{$country->name}}</option>
+                                        @endforeach
+
+                                    </select>
+
+                                    @error('country_code')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -34,15 +38,13 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="country_code"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Country Code') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="country_code" type="text"
-                                        class="form-control @error('country_code') is-invalid @enderror" name="country_code"
-                                        value="{{ old('country_code') }}" required autocomplete="country_code" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                                        name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                                    @error('country_code')
+                                    @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
