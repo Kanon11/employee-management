@@ -13,7 +13,7 @@ class StateUpdateRequester extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StateUpdateRequester extends FormRequest
     public function rules()
     {
         return [
-            //
+            'country_id' => ['required'],
+            'name' => ['required']
         ];
     }
 }

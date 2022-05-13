@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StateStoreRequester;
+use App\Http\Requests\StateUpdateRequester;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\State;
@@ -63,9 +64,11 @@ class StateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(State $state)
     {
-        //
+        $countries=Country::all();
+        return view('state.edit',compact('state','countries'));
+        
     }
 
     /**
@@ -75,9 +78,15 @@ class StateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StateUpdateRequester $request, State $state)
     {
-        //
+        $state->update([
+            'name'=>$request->name,
+            'country_id'=>$request->country_id
+        ]);
+        
+        return redirect()->route('state.index')->with('message', "State Updated Successfully");
+        
     }
 
     /**
@@ -86,8 +95,9 @@ class StateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(State $state)
     {
-        //
+        $state->delete();
+        return redirect()->route('state.index')->with('message', "State Deleted Successfully");
     }
 }
