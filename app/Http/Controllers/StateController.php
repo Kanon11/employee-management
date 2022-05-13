@@ -25,8 +25,7 @@ class StateController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+    
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -87,6 +86,7 @@ class StateController extends Controller
         
         return redirect()->route('state.index')->with('message', "State Updated Successfully");
         
+
     }
 
     /**
